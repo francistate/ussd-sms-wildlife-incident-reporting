@@ -1,0 +1,76 @@
+{
+    "severe": {
+        "keywords": [
+            "severe", "serious", "critical",
+            "emergency", "urgent", "immediately",
+            "multiple", "many", "several",
+            "killed", "dead", "death", "died",
+            "hospital", "ambulance",
+            "all", "entire", "completely",
+            "massive", "huge", "extensive"
+        ],
+        "sw": [
+            "mbaya sana", "hatari sana",
+            "haraka", "sasa hivi",
+            "kufa", "wamekufa",
+            "hospitali"
+        ],
+        "count_indicators": ["many", "several", "multiple", "all", "10", "20", "50", "100"],
+        "score": 1.0
+    },
+    "moderate": {
+        "keywords": [
+            "moderate", "some",
+            "few", "couple",
+            "damaged", "injured",
+            "worried", "concerned"
+        ],
+        "sw": [
+            "kiasi", "kidogo",
+            "kuharibiwa", "kuumia"
+        ],
+        "count_indicators": ["few", "some", "2", "3", "4", "5"],
+        "score": 0.6
+    },
+    "minor": {
+        "keywords": [
+            "minor", "small", "little",
+            "one", "single",
+            "slight", "just",
+            "only", "bit"
+        ],
+        "sw": [
+            "ndogo", "kidogo tu",
+            "moja tu"
+        ],
+        "count_indicators": ["one", "1", "single", "just one"],
+        "score": 0.3
+    },
+    "count_patterns": {
+        "1": "1",
+        "one": "1",
+        "single": "1",
+        "2": "2-5",
+        "3": "2-5",
+        "4": "2-5",
+        "5": "2-5",
+        "two": "2-5",
+        "three": "2-5",
+        "four": "2-5",
+        "five": "2-5",
+        "few": "2-5",
+        "couple": "2-5",
+        "several": "6-10",
+        "6": "6-10",
+        "7": "6-10",
+        "8": "6-10",
+        "9": "6-10",
+        "10": "6-10",
+        "many": "10+",
+        "multiple": "6-10",
+        "numerous": "10+",
+        "lots": "10+",
+        "herd": "10+",
+        "pack": "6-10"
+    }
+}
