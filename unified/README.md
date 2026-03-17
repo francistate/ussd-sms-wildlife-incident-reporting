@@ -12,7 +12,7 @@ Combined USSD and SMS wildlife incident reporting system in a single server.
 **SMS Channel:**
 - Free-form SMS parsing with hybrid NLP
 - Rule-based extraction with HuggingFace LLM fallback
-- Clarification flow for low-confidence reports
+- Redirects to USSD for unclear messages
 - Ranger alerts for high-priority incidents
 
 ## Setup
@@ -35,6 +35,7 @@ DATABASE_URL=postgresql://user:pass@localhost/wildlife
 AT_USERNAME=your_africastalking_username
 AT_API_KEY=your_africastalking_api_key
 AT_SHORTCODE=your_shortcode
+USSD_CODE="*384*55#"
 HUGGINGFACE_API_KEY=your_hf_key
 DEBUG=true
 PORT=8000

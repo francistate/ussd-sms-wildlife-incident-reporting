@@ -6,7 +6,7 @@ SMS-based wildlife incident reporting system with NLP parsing for free-form mess
 
 - Free-form SMS parsing using hybrid NLP (rule-based + LLM fallback)
 - Automatic report creation from natural language messages
-- Clarification flow for low-confidence extractions
+- Asks for clearer message when extraction fails
 - Ranger alerts for high-priority incidents
 - Delivery report tracking
 
@@ -57,8 +57,8 @@ python main.py
 1. User sends free-form SMS: `"Saw 3 elephants near Mara River today"`
 2. NLP extracts: species=elephant, count=3, location=Mara River
 3. If confidence >= 80%: Report created automatically
-4. If confidence 50-80%: Confirmation SMS sent to user
-5. If confidence < 50%: Clarification questions sent
+4. If confidence 50-80%: Report created with review flag
+5. If confidence < 50%: User asked to send clearer message
 6. High-priority incidents trigger ranger alerts
 
 ## Integration
