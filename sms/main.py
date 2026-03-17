@@ -74,13 +74,12 @@ app = FastAPI(
     - Receive and parse free-form SMS reports using NLP
     - Send incident confirmations to reporters
     - Alert rangers for high-priority incidents
-    - Track conversations for clarification flow
 
     ## How it works
     1. User sends SMS describing wildlife incident
     2. System extracts: species, incident type, location, severity
     3. If confident: creates report and sends confirmation
-    4. If uncertain: asks clarifying questions via SMS
+    4. If uncertain: asks user to send clearer message
     5. Rangers alerted for high/critical priority incidents
     """,
     version="2.0.0",

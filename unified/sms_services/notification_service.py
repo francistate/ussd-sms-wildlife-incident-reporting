@@ -5,10 +5,10 @@ Handles sending incident confirmations and ranger alerts
 import logging
 from typing import List, Optional, Dict, Any
 
-from services.sms_service import get_sms_service
-from services.templates import (
+from sms_services.sms_service import get_sms_service
+from sms_services.templates import (
     CONFIRMATION_TEMPLATE, CONFIRMATION_NO_LOCATION, ALERT_TEMPLATE,
-    UNCLEAR_MESSAGE_TEMPLATE, HELP_TEMPLATE, DEFAULT_RESPONSE
+    get_unclear_message_template, get_help_template, get_default_response
 )
 from config import settings
 
@@ -122,9 +122,9 @@ def send_ranger_alert(
     }
 
 
-def send_unclear_message(phone_number: str) -> bool:
+def send_use_ussd(phone_number: str) -> bool:
     """
-    Send message when we couldn't understand the report
+    Send message asking user to send clearer SMS or use USSD
 
     Args:
         phone_number: User's phone number
@@ -137,7 +137,7 @@ def send_unclear_message(phone_number: str) -> bool:
         logger.warning("SMS service not initialized")
         return False
 
-    result = sms.send_single(UNCLEAR_MESSAGE_TEMPLATE, phone_number)
+    result = sms.send_single(get_unclear_message_template(), phone_number)
     return result.get("success", False)
 
 
@@ -147,7 +147,7 @@ def send_help(phone_number: str) -> bool:
     if not sms:
         return False
 
-    result = sms.send_single(HELP_TEMPLATE, phone_number)
+    result = sms.send_single(get_help_template(), phone_number)
     return result.get("success", False)
 
 
@@ -157,7 +157,7 @@ def send_default_response(phone_number: str) -> bool:
     if not sms:
         return False
 
-    result = sms.send_single(DEFAULT_RESPONSE, phone_number)
+    result = sms.send_single(get_default_response(), phone_number)
     return result.get("success", False)
 
 

@@ -1,0 +1,70 @@
+{
+    "elephant": {
+        "en": ["elephant", "elephants", "tusker", "tuskers", "jumbo"],
+        "sw": ["tembo", "ndovu"]
+    },
+    "lion": {
+        "en": ["lion", "lions", "lioness", "lionesses", "male lion", "female lion"],
+        "sw": ["simba"]
+    },
+    "leopard": {
+        "en": ["leopard", "leopards"],
+        "sw": ["chui"]
+    },
+    "buffalo": {
+        "en": ["buffalo", "buffalos", "buffaloes", "cape buffalo"],
+        "sw": ["nyati", "mbogo"]
+    },
+    "hyena": {
+        "en": ["hyena", "hyenas", "spotted hyena"],
+        "sw": ["fisi"]
+    },
+    "hippo": {
+        "en": ["hippo", "hippos", "hippopotamus", "hippopotamuses"],
+        "sw": ["kiboko"]
+    },
+    "crocodile": {
+        "en": ["crocodile", "crocodiles", "croc", "crocs"],
+        "sw": ["mamba"]
+    },
+    "wild_dog": {
+        "en": ["wild dog", "wild dogs", "african wild dog", "painted dog"],
+        "sw": ["mbwa mwitu"]
+    },
+    "snake": {
+        "en": ["snake", "snakes", "python", "pythons", "cobra", "cobras", "mamba", "black mamba", "green mamba", "puff adder", "viper"],
+        "sw": ["nyoka"]
+    },
+    "cheetah": {
+        "en": ["cheetah", "cheetahs"],
+        "sw": ["duma"]
+    },
+    "rhino": {
+        "en": ["rhino", "rhinos", "rhinoceros", "black rhino", "white rhino"],
+        "sw": ["kifaru"]
+    },
+    "zebra": {
+        "en": ["zebra", "zebras"],
+        "sw": ["punda milia"]
+    },
+    "giraffe": {
+        "en": ["giraffe", "giraffes"],
+        "sw": ["twiga"]
+    },
+    "baboon": {
+        "en": ["baboon", "baboons"],
+        "sw": ["nyani"]
+    },
+    "monkey": {
+        "en": ["monkey", "monkeys", "vervet", "colobus"],
+        "sw": ["tumbili", "kima"]
+    },
+    "warthog": {
+        "en": ["warthog", "warthogs"],
+        "sw": ["ngiri"]
+    },
+    "jackal": {
+        "en": ["jackal", "jackals"],
+        "sw": ["bweha"]
+    }
+}

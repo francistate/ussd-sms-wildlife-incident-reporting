@@ -4,14 +4,15 @@ A dual-channel wildlife incident reporting system using USSD and SMS, designed f
 
 ## Overview
 
-This project provides two standalone applications for wildlife conservation reporting:
+This project provides wildlife conservation reporting via USSD and SMS channels:
 
 | App | Port | Description |
 |-----|------|-------------|
-| [USSD](./ussd/) | 8000 | Menu-driven reporting via USSD codes |
-| [SMS](./sms/) | 8001 | Free-form SMS with NLP parsing |
+| [Unified](./unified/) | 8000 | Both USSD + SMS in single server |
+| [USSD](./ussd/) | 8000 | Standalone USSD only |
+| [SMS](./sms/) | 8001 | Standalone SMS only |
 
-Both apps integrate with Africa's Talking API and store reports in PostgreSQL.
+All apps integrate with Africa's Talking API and store reports in PostgreSQL.
 
 ## Quick Start
 
@@ -20,7 +21,16 @@ Both apps integrate with Africa's Talking API and store reports in PostgreSQL.
 - PostgreSQL
 - Africa's Talking account
 
-### USSD App
+### Unified App (Recommended)
+```bash
+cd unified
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+python main.py
+```
+
+### Standalone USSD
 ```bash
 cd ussd
 python -m venv venv
@@ -29,7 +39,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-### SMS App
+### Standalone SMS
 ```bash
 cd sms
 python -m venv .venv
@@ -42,17 +52,15 @@ python main.py
 
 ```
 ussd-sms-wildlife-incident-reporting/
-├── ussd/                 # USSD application
-│   ├── api/              # Routes and endpoints
-│   ├── database/         # Models and repository
-│   ├── services/         # Business logic
-│   └── data/             # Menu options
-├── sms/                  # SMS application
-│   ├── api/              # Routes and schemas
-│   ├── database/         # Models and repository
-│   ├── services/         # SMS, notifications, LLM
+├── unified/              # Combined USSD + SMS
+│   ├── api/              # All routes
+│   ├── database/         # Shared models
+│   ├── sms_services/     # SMS business logic
+│   ├── ussd_services/    # USSD business logic
 │   ├── nlp/              # Text extraction
-│   └── data/keywords/    # Species, locations, etc.
+│   └── data/             # Keywords and menu options
+├── ussd/                 # Standalone USSD
+├── sms/                  # Standalone SMS
 └── README.md
 ```
 

@@ -1,5 +1,5 @@
 """
-API Routes for SMS App
+API Routes for SMS functionality
 """
 from fastapi import APIRouter, Form, HTTPException, Query, Depends
 from typing import Optional, List
@@ -15,22 +15,22 @@ from api.schemas import (
 from database.connection import get_db_session, check_connection
 from database.repository import SMSReportRepository, SMSMessageRepository
 from nlp.extractor import extract_from_sms, ExtractionResult
-from services.sms_service import get_sms_service
-from services.notification_service import (
-    send_confirmation, send_ranger_alert, send_unclear_message,
+from sms_services.sms_service import get_sms_service
+from sms_services.notification_service import (
+    send_confirmation, send_ranger_alert, send_use_ussd,
     send_help, send_default_response, should_alert_rangers
 )
-from services.llm_service import extract_with_llm, merge_llm_result
+from sms_services.llm_service import extract_with_llm, merge_llm_result
 from config import settings
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter()
+sms_router = APIRouter(tags=["SMS"])
 
 
 # ============ HEALTH & INFO ============
 
-@router.get("/", response_model=HealthResponse)
+@sms_router.get("/", response_model=HealthResponse)
 async def health_check():
     """Health check endpoint"""
     sms = get_sms_service()
@@ -48,7 +48,7 @@ async def health_check():
 
 # ============ SMS SENDING ============
 
-@router.post("/sms/send", response_model=SMSResponse)
+@sms_router.post("/sms/send", response_model=SMSResponse)
 async def send_sms(request: SendSMSRequest):
     """Send SMS to one or more recipients"""
     sms = get_sms_service()
@@ -74,7 +74,7 @@ async def send_sms(request: SendSMSRequest):
     )
 
 
-@router.post("/sms/incident/confirmation", response_model=SMSResponse)
+@sms_router.post("/sms/incident/confirmation", response_model=SMSResponse)
 async def send_incident_confirmation(request: ConfirmationRequest):
     """Send incident confirmation SMS to reporter"""
     success = send_confirmation(
@@ -93,7 +93,7 @@ async def send_incident_confirmation(request: ConfirmationRequest):
     )
 
 
-@router.post("/sms/incident/alert", response_model=SMSResponse)
+@sms_router.post("/sms/incident/alert", response_model=SMSResponse)
 async def send_incident_alert(request: RangerAlertRequest):
     """Send alert SMS to rangers"""
     result = send_ranger_alert(
@@ -124,7 +124,7 @@ async def send_incident_alert(request: RangerAlertRequest):
 
 # ============ SMS RECEIVING (WEBHOOK) ============
 
-@router.post("/sms/incoming")
+@sms_router.post("/sms/incoming")
 async def receive_sms(
     date: str = Form(...),
     from_: str = Form(..., alias="from"),
@@ -241,12 +241,12 @@ async def receive_sms(
                 "incident_id": report.incident_id
             }
 
-        # Both failed - ask user to send clearer message
-        send_unclear_message(from_)
+        # Both failed - ask user to use USSD
+        send_use_ussd(from_)
 
         return {
             "status": "received",
-            "action": "unclear_message"
+            "action": "ussd_redirect"
         }
 
 
@@ -413,7 +413,7 @@ def _calculate_priority_from_dict(data: dict) -> str:
 
 # ============ REPORTS ============
 
-@router.get("/sms/reports", response_model=ReportListResponse)
+@sms_router.get("/sms/reports", response_model=ReportListResponse)
 async def get_reports(
     status: Optional[str] = None,
     priority: Optional[str] = None,
@@ -453,7 +453,7 @@ async def get_reports(
     )
 
 
-@router.get("/sms/reports/{incident_id}", response_model=ReportResponse)
+@sms_router.get("/sms/reports/{incident_id}", response_model=ReportResponse)
 async def get_report(
     incident_id: str,
     db: Session = Depends(get_db_session)
@@ -482,7 +482,7 @@ async def get_report(
 
 # ============ MESSAGES ============
 
-@router.get("/sms/messages", response_model=MessageListResponse)
+@sms_router.get("/sms/messages", response_model=MessageListResponse)
 async def get_messages(
     direction: Optional[str] = None,
     phone_number: Optional[str] = None,
@@ -515,7 +515,7 @@ async def get_messages(
 
 # ============ STATS ============
 
-@router.get("/sms/stats", response_model=StatsResponse)
+@sms_router.get("/sms/stats", response_model=StatsResponse)
 async def get_stats(db: Session = Depends(get_db_session)):
     """Get SMS statistics"""
     report_repo = SMSReportRepository(db)
@@ -529,7 +529,7 @@ async def get_stats(db: Session = Depends(get_db_session)):
 
 # ============ DELIVERY REPORTS (WEBHOOK) ============
 
-@router.post("/sms/delivery")
+@sms_router.post("/sms/delivery")
 async def delivery_report(
     id: str = Form(...),
     status: str = Form(...),
@@ -581,7 +581,7 @@ async def delivery_report(
     }
 
 
-@router.get("/sms/delivery/stats")
+@sms_router.get("/sms/delivery/stats")
 async def get_delivery_stats(db: Session = Depends(get_db_session)):
     """Get delivery statistics for outgoing messages"""
     from database.models import SMSMessage
@@ -612,7 +612,7 @@ async def get_delivery_stats(db: Session = Depends(get_db_session)):
 
 # ============ TESTING/DEBUG ============
 
-@router.post("/sms/test/extract", response_model=ExtractionResponse)
+@sms_router.post("/sms/test/extract", response_model=ExtractionResponse)
 async def test_extraction(message: str):
     """Test NLP extraction on a message (for debugging)"""
     extraction = extract_from_sms(message)

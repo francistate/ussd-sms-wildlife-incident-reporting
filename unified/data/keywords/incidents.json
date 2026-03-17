@@ -1,0 +1,104 @@
+{
+    "livestock_attack": {
+        "keywords": [
+            "attack", "attacked", "attacking",
+            "killed", "kill", "killing",
+            "ate", "eat", "eating", "eaten",
+            "mauled", "maul", "mauling",
+            "injured livestock",
+            "goat", "goats", "cow", "cows", "cattle",
+            "sheep", "chicken", "chickens", "poultry",
+            "donkey", "donkeys", "pig", "pigs",
+            "livestock", "animal killed my"
+        ],
+        "sw": [
+            "shambulia", "amekula", "kuua",
+            "mbuzi", "ng'ombe", "kondoo", "kuku"
+        ],
+        "priority_boost": 0.1
+    },
+    "crop_damage": {
+        "keywords": [
+            "crop", "crops", "farm", "farms", "farming",
+            "destroyed", "destroy", "destroying", "destruction",
+            "damaged", "damage", "damaging",
+            "eaten crops", "ate crops", "eating crops",
+            "maize", "corn", "wheat", "vegetables",
+            "plantation", "field", "fields",
+            "harvest", "trampled", "trample"
+        ],
+        "sw": [
+            "shamba", "mashamba", "mazao",
+            "mahindi", "ngano", "mboga",
+            "kuharibu", "kula mazao"
+        ],
+        "priority_boost": 0
+    },
+    "property_damage": {
+        "keywords": [
+            "property", "house", "home", "hut",
+            "fence", "fences", "fencing",
+            "broke", "broken", "break", "breaking",
+            "destroyed building", "damaged house",
+            "water tank", "storage", "barn",
+            "vehicle", "car"
+        ],
+        "sw": [
+            "nyumba", "kibanda", "uzio",
+            "kuvunja", "imevunjwa"
+        ],
+        "priority_boost": 0
+    },
+    "human_injury": {
+        "keywords": [
+            "injured", "injury", "injuries",
+            "hurt", "hurting",
+            "attacked person", "attacked me", "attacked someone",
+            "attacked human", "attacked people",
+            "bit", "bite", "bitten", "biting",
+            "mauled person", "wounded",
+            "hospital", "medical", "bleeding",
+            "child attacked", "man attacked", "woman attacked",
+            "person injured", "people injured"
+        ],
+        "sw": [
+            "kuumia", "ameumia", "wameumia",
+            "kuumwa", "hospitali", "damu"
+        ],
+        "priority_boost": 0.3
+    },
+    "dangerous_animal": {
+        "keywords": [
+            "dangerous", "danger",
+            "threatening", "threat",
+            "aggressive", "aggression",
+            "near school", "near village", "near home",
+            "prowling", "stalking",
+            "seen near", "spotted near",
+            "scared", "scary", "afraid",
+            "help", "emergency", "urgent"
+        ],
+        "sw": [
+            "hatari", "kutisha",
+            "shuleni", "kijijini",
+            "msaada", "haraka"
+        ],
+        "priority_boost": 0.2
+    },
+    "sighting": {
+        "keywords": [
+            "saw", "seen", "see", "seeing",
+            "spotted", "spot", "spotting",
+            "sighting", "sighted",
+            "observed", "observe",
+            "watching", "watched",
+            "passed", "passing", "crossed",
+            "just saw", "i saw"
+        ],
+        "sw": [
+            "nimeona", "kuona", "aliona",
+            "kupita", "amepita"
+        ],
+        "priority_boost": -0.2
+    }
+}
